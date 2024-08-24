@@ -1,0 +1,68 @@
+/* Rescuer.css */
+
+/* Footer styling */
+footer {
+    background-color: #343a40; /* Initial dark background color */
+    color: #c04e4e; /* White text for contrast */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+  }
+  
+  footer:hover {
+    background-color: #23272b; /* Darker color on hover */
+  }
+  
+  footer a {
+    color: #a75757; /* Ensure links are white */
+    text-decoration: none;
+  }
+  
+  footer a:hover {
+    color: #f8f7ee; /* Hover effect for links */
+    text-decoration: underline;
+  }
+  
+  footer h6 {
+    font-weight: 600;
+    color: #f8d210; /* Gold color for section headings */
+  }
+  
+  footer p, footer i {
+    margin-bottom: 1rem;
+  }
+  
+  footer .fa-gem {
+    color: #f8d210; /* Gold color for the logo icon */
+  }
+  
+  /* Social Media Icons */
+  footer .fab {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    transition: color 0.3s;
+  }
+  
+  footer .fab:hover {
+    color: #f8d210;
+  }
+  
+  /* Grid Layout for Footer */
+  footer .container {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+  
+  footer .row {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Copyright Section */
+  footer .text-center.p-4 {
+    background-color: #23272b; /* Slightly darker color for copyright section */
+    color: #f8d210; /* Gold color for copyright text */
+    font-size: 0.9rem;
+  }
+  
+  footer .text-reset.fw-bold:hover {
+    color: #f8d210;
+  }
+  

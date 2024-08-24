@@ -1,0 +1,64 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #78cad8; /* Light gray background for the whole page */
+  }
+  
+  h1 {
+    color: #343a40; /* Dark gray text color */
+    font-weight: 600; /* Slightly bold text */
+  }
+  
+  /* Container Styling */
+  .container {
+    background-color: #ffffff; /* White background for the form container */
+    border-radius: 8px; /* Rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px; /* Padding inside the container */
+    margin-top: 20px; /* Margin at the top of the container */
+  }
+  
+  /* Form Styling */
+  .form-group {
+    margin-bottom: 1.5rem; /* Space between form groups */
+  }
+  
+  .form-group label {
+    font-weight: 500; /* Slightly bold text for labels */
+    color: #495057; /* Medium gray text color */
+  }
+  
+  .form-control {
+    border-radius: 4px; /* Rounded corners for inputs */
+    border: 1px solid #ced4da; /* Light gray border */
+    padding: 0.75rem; /* Padding inside the input fields */
+    font-size: 1rem; /* Font size for input text */
+  }
+  
+  /* Hover and Focus States */
+  .form-control:focus {
+    border-color: #80bdff; /* Blue border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Light blue shadow on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Blue background for the submit button */
+    border-color: #007bff; /* Blue border color for the submit button */
+    color: #ffffff; /* White text color */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #004085; /* Darker blue border on hover */
+  }
+  
+  .btn-primary:focus, .btn-primary:active {
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); /* Blue shadow on focus/active */
+  }
+  
+  /* Error Styling */
+  input::placeholder {
+    color: #6c757d; /* Gray color for placeholder text */
+  }
+  

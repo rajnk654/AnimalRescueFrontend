@@ -1,0 +1,11 @@
+/* Default background color */
+.background-change {
+    background-color: #866262; /* Default white background */
+    transition: background-color 0.5s ease; /* Smooth transition effect */
+  }
+  
+  /* Background color change on hover */
+  .background-change:hover {
+    background-color: #6096c5; /* Light blue background on hover */
+  }
+  

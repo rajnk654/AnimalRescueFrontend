@@ -1,0 +1,14 @@
+/* navbar.css */
+.navbar-custom {
+    background-color: #dfdedd; /* Change this to your desired color */
+    color: white; /* Optional: Change the text color */
+  }
+  
+  .navbar-custom .nav-link {
+    color: white; /* Optional: Change the link color */
+  }
+  
+  .navbar-custom .nav-link:hover {
+    color: #14130e; /* Optional: Change the link hover color */
+  }
+  

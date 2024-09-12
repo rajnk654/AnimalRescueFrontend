@@ -13,6 +13,8 @@ const RescuerSignUp = () => {
     const [ZipCode, setZipcode] = useState("");
     const [conformPassword, setConformPassword] = useState("");
 
+    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -31,8 +33,21 @@ const RescuerSignUp = () => {
 
     return (
         <>
+        <div className="Rescuer-container">
             <h1 className='text-center mt-3'>Register</h1>
-            <div className="container w-25 rouded-5 p-2">
+            <div
+                className="container  py-md-2 mt-md-1"
+                style={{
+                    width: '45%',
+                    borderRadius: '8px',
+                    padding: '16px',
+                    backgroundImage: "url('bg1.jpg')", // Replace with your image URL
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    // Optional: Set a max width to ensure the container doesn't stretch too wide on large screens
+                }}
+            >
 
                 <form>
                     <div className="form-group" >
@@ -59,18 +74,18 @@ const RescuerSignUp = () => {
                     </div>
                     <div className="form-group">
                         <div className="row">
-                        <div className="col-md-4">
-                            <label htmlFor="exampleInputEmail1">State</label>
-                            <input type="text" value={state} onChange={e => setState(e.target.value)} className="form-control" id="state" placeholder="Enter state" />
-                        </div>
-                        <div className="col-md-4">
-                            <label htmlFor='exampleInputEmail1'>City</label>
-                            <input type='text' value={city} onChange={e => setCity(e.target.value)} className="form-control" id="city" placeholder="Enter City" />
-                        </div>
-                        <div className="col-md-4">
-                            <label htmlFor='exampleInputEmail1'>Zipcode</label>
-                        <input type='text' value={ZipCode} onChange={e => setZipcode(e.target.value)} className="form-control" id="zipCode" placeholder="Enter Zipcode" />
-                        </div>
+                            <div className="col-md-4">
+                                <label htmlFor="exampleInputEmail1">State</label>
+                                <input type="text" value={state} onChange={e => setState(e.target.value)} className="form-control" id="state" placeholder="Enter state" />
+                            </div>
+                            <div className="col-md-4">
+                                <label htmlFor='exampleInputEmail1'>City</label>
+                                <input type='text' value={city} onChange={e => setCity(e.target.value)} className="form-control" id="city" placeholder="Enter City" />
+                            </div>
+                            <div className="col-md-4">
+                                <label htmlFor='exampleInputEmail1'>Zipcode</label>
+                                <input type='text' value={ZipCode} onChange={e => setZipcode(e.target.value)} className="form-control" id="zipCode" placeholder="Enter Zipcode" />
+                            </div>
                         </div>
                     </div>
                     <div className="form-group">
@@ -82,6 +97,7 @@ const RescuerSignUp = () => {
                     <button type="submit" onClick={handleSubmit} className="btn btn-primary mt-2">Submit</button><br />
                 </form >
             </div >
+            </div>
         </>
     )
 }

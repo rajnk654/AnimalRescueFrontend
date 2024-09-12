@@ -1,11 +1,65 @@
-/* Default background color */
-.background-change {
-    background-color: #866262; /* Default white background */
-    transition: background-color 0.5s ease; /* Smooth transition effect */
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: #f3fafa; /* Updated background color */
+  margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-content {
+  max-width: 600px;
+  text-align: left;
+  padding: 1rem;
+}
+
+.cards-section {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+.card-3d {
+  background-color: #f8f8f8; /* Updated background color */
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-align: center;
+  width: 300px;
+}
+
+.card-3d:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-3d h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-3d p {
+  font-size: 1rem;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .cards-section {
+    flex-direction: column;
+    align-items: center;
   }
-  
-  /* Background color change on hover */
-  .background-change:hover {
-    background-color: #6096c5; /* Light blue background on hover */
+
+  .card-3d {
+    width: 80%;
   }
-  
+}

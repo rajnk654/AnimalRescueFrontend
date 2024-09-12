@@ -1,13 +1,22 @@
 import { Link } from 'react-router-dom'
-import React from 'react'
+
+import React, { useEffect } from 'react'
 import './Header.css'
 
+
 const Header = () => {
+    
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-custom">
+        <div className="container">
+            <nav className="navbar navbar-expand-lg navbar-custom fixed-top">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">Animal Rescue</Link>
+                    <Link className="navbar custom-font" to="/">
+                    {/* <img 
+                    src="dog1.jpg" 
+                    alt="Animal Rescue Logo" 
+                    style={{ height: '40px', marginRight: '10px' }} /> */}
+                Animal Rescue</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +48,7 @@ const Header = () => {
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/UserSignUp">User</Link></li>
                                     <li><Link className="dropdown-item" to="/RescuerSignUp">Rescuer</Link></li>
-
+                                    <li><Link className="dropdown-item" to="/Admin">Admin</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item">
@@ -48,13 +57,11 @@ const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link" aria-current="page" to="/blogPage" >Blog</Link>
                             </li>
-                        </ul>
-                        
+                        </ul>      
                     </div>
                 </div>
-
             </nav>
-
+            </div>
         </>
     )
 }

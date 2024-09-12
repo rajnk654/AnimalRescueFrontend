@@ -1,79 +1,44 @@
-/* Container for Perspective */
-.card-container {
-    perspective: 1000px; /* Controls the 3D effect depth */
-  }
-  .card:hover ~ .container {
-    background-color: #e0f7fa;
-  }
-  
-  /* Card Default Style */
-  .card {
-    background-color: #c7fbff; /* Light gray background for default state */
-    border: 1px solid #f0e8e8;
-    border-radius: 12px;
-    transition: transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease;
-    transform-style: preserve-3d; /* Maintains 3D effect for child elements */
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Card Hover Effect */
-  .card:hover {
-    transform: rotateY(15deg) rotateX(10deg); /* 3D rotation effect */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
-    background-color: #e0f7fa; /* Light cyan background on hover */
-  }
-  
-  /* Image Styling */
-  .card img {
-    object-fit: cover;
-    height: 100%;
-    border-radius: 12px 0 0 12px;
-  }
-  
-  /* Card Body Styling */
-  .card-body {
-    padding: 20px;
-    transform: translateZ(30px); /* Adds depth to the content */
-  }
-  
-  /* Title and Text Styling */
-  .card-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  h4, h5 {
-    font-family: 'Open Sans', sans-serif;
-    color: #555;
-    margin-bottom: 10px;
-  }
- 
+/* Style for the Rescuer card */
+.card {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
 
-  
-  /* Responsive Design for Image and Text */
-  @media (max-width: 767.98px) {
-    .card img {
-      border-radius: 12px 12px 0 0;
-    }
-   
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #343a40;
+}
+
+h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #495057;
+}
+
+/* Image styles */
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px 0 0 10px;
+}
+
+/* Responsive card layout */
+@media (max-width: 768px) {
+  .card {
+    max-width: 100%;
   }
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-20px);
-    }
-    60% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  /* .card {
-    animation: bounce 2s infinite;
-  }
-   */
-  
+}

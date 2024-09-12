@@ -1,14 +1,35 @@
-/* navbar.css */
 .navbar-custom {
-    background-color: #dfdedd; /* Change this to your desired color */
-    color: white; /* Optional: Change the text color */
-  }
-  
-  .navbar-custom .nav-link {
-    color: white; /* Optional: Change the link color */
-  }
-  
-  .navbar-custom .nav-link:hover {
-    color: #14130e; /* Optional: Change the link hover color */
-  }
-  
+  background-color: #706f6d; /* Background color */
+  color: white; /* Text color */
+  padding: 2px 2px; /* Padding for the navbar (adjust as needed) */
+}
+
+.navbar-custom .nav-link {
+  color: white; /* Link color */
+  font-size: 18px; /* Adjust the link font size */
+  padding: 8px 16px; /* Add padding to links for better spacing */
+}
+
+.navbar-custom .nav-link:hover {
+  color: #14130e; /* Link hover color */
+}
+
+.custom-font {
+  font-size: 30px; /* Font size for the brand or title */
+  font-family: 'Georgia', sans-serif; /* Font family */
+  font-weight: bold; /* Font weight */
+  text-decoration: none !important;
+  color: #161414; /* Font color */
+  line-height: 1.2; /* Adjust line height for better vertical alignment */
+}
+
+.navbar-toggler {
+  font-size: 20px; /* Adjust size of the navbar toggler icon */
+  border: none; /* Remove border around the toggler button */
+  padding: 5px 10px; /* Padding for the toggler button */
+}
+
+.navbar-toggler-icon {
+  width: 1.5em; /* Width of the toggler icon */
+  height: 1.5em; /* Height of the toggler icon */
+}

@@ -18,7 +18,7 @@ const Rescuer = ({ data}) => {
         <div className="col-md-4">
           <img src="https://mdbcdn.b-cdn.net/wp-content/uploads/2020/06/vertical.webp" alt="Trendy Pants and Shoes" className="img-fluid rounded-start" />
         </div>
-        <div className="col-md-8">
+        <div className="col-md-6">
           <div className="card-body">
             <h3 className="card-title text-center">Rescuer Details</h3>
             <h4 className='card-title text-center'>Name : {name}</h4>

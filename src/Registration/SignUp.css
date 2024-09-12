@@ -1,7 +1,13 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #78cad8; /* Light gray background for the whole page */
+    background-color: #bbbbb9; /* Light gray background for the whole page */
+    /* body {
+      background-image: url('bg1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+  } */
   }
   
   h1 {
@@ -11,11 +17,11 @@ body {
   
   /* Container Styling */
   .container {
-    background-color: #ffffff; /* White background for the form container */
-    border-radius: 8px; /* Rounded corners for the container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    padding: 20px; /* Padding inside the container */
-    margin-top: 20px; /* Margin at the top of the container */
+    /* background-color: #ffffff; White background for the form container */
+    /* border-radius: 8px; Rounded corners for the container */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); Subtle shadow for depth */
+    /* padding: 20px; Padding inside the container */
+    /* margin-top: 20px; Margin at the top of the container */
   }
   
   /* Form Styling */
@@ -61,4 +67,16 @@ body {
   input::placeholder {
     color: #6c757d; /* Gray color for placeholder text */
   }
-  
+
+  .user-container{
+    background-image: "bg1.jpg";
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    filter: grayscale(25%);
+    /* opacity: 0.8; */
+  }
+  .mt-3 {
+    margin-top: 2rem !important;
+}

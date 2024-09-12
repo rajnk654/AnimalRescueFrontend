@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import AnimalModal from './AnimalModal'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import Dashboard from '../Dashboard';
 
-const AdoptAnimal = () => {
-  const [animals, setAnimals] = useState([]);
-  const navigate = useNavigate();
-
-  const url = import.meta.env.VITE_ANIMAL_RESCUE_URL;
+const SidebarAnimal = () => {
+    const [animals, setAnimals] = useState([]);
+    const url = import.meta.env.VITE_ANIMAL_RESCUE_URL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,12 +24,10 @@ const AdoptAnimal = () => {
 
   console.log(animals);
 
-  const handleMoreDetailsClick = () => {
-    navigate(`/AnimalModal`);
-  };
-
   return (
-    <div className="container py-md-5 mt-md-3">
+    <>
+    <Dashboard>
+    <div className="container vh-100">
       <div className="row mb-4">
         {animals.length > 0 ? (
           animals.map(({ animalType, adoptable }, index) => (
@@ -45,9 +40,9 @@ const AdoptAnimal = () => {
                   <h6 className="card-title text-center">Animal Type: {animalType}</h6>
                   <h6 className="card-title text-center">Adoptable: {adoptable ? "Yes" : "No"}</h6>
                   <div className="d-grid mx-auto">
-                  <button type="button" class="btn btn-warning" onClick={() => handleMoreDetailsClick()}
-                    >More Details</button><br/>
-                    <button type="button" className="btn btn-primary">Request For Adoption</button>
+                  {/* <button type="button" class="btn btn-warning" 
+                    >Back</button><br/> */}
+                    <button type="button" className="btn btn-primary">Action</button>
 
                   </div>
                 </div>
@@ -60,8 +55,10 @@ const AdoptAnimal = () => {
       </div>
       {/* <AnimalModal/> */}
     </div>
-    
+    </Dashboard>
+    </>
   );
 };
 
-export default AdoptAnimal;
+  
+export default SidebarAnimal

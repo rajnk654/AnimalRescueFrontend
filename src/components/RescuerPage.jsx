@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Rescuer.css';
+import axios from 'axios';
+import BookRescuer from './BookRescuer';
 
 const RescuerPage = () => {
   const [rescuers, setRescuers] = useState([]);
@@ -12,28 +14,33 @@ const RescuerPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/Rescuer`);
-        const data = await response.json();
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${url}/Rescuer`, {
+          headers: {
+            Authorization: token
+          },
+        });
+        const data = Array.isArray(response.data) ? response.data : [];
         setRescuers(data);
         setLoading(false); 
       } catch (error) {
         console.log("Error fetching rescuers:", error);
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+  console.log(rescuers);
   useEffect(() => {
-    
     if (cityFilter) {
       const filtered = rescuers.filter((rescuer) => 
         rescuer.city.toLowerCase().includes(cityFilter.toLowerCase())
       );
       setFilteredRescuers(filtered);
     } else {
-      setFilteredRescuers([]); 
+      setFilteredRescuers(rescuers); // Show all rescuers if no filter is applied
     }
   }, [cityFilter, rescuers]);
 
@@ -54,9 +61,7 @@ const RescuerPage = () => {
       <div className="row">
         {loading ? (
           <h2>Loading rescuers...</h2>
-        ) : !cityFilter ? (
-          <h2>No  rescuers Found</h2>
-        ) : filteredRescuers.length < 1 ? (
+        ) : filteredRescuers.length === 0 ? (
           <h2>No rescuers found</h2>
         ) : (
           filteredRescuers.map((rescuer) => (
@@ -70,11 +75,14 @@ const RescuerPage = () => {
                     <h3 className="card-title text-center">Rescuer Details</h3>
                     <h4 className="card-title text-center">Name: {rescuer.userDto?.firstName}</h4>
                     <h4 className="card-title text-center">City: {rescuer.city}</h4>
-                    <h4 className="card-title text-center">Price: {rescuer.price}</h4>
+                    <h4 className="card-title text-center">Price: {rescuer.price || 500}</h4>
                     <h4 className="card-title text-center">Rating: {rescuer.rating || 5}</h4>
                   </div>
                 </div>
+                
               </div>
+              {/* <BookRescuer rescuerId = {rescuer.id} /> */}
+              <BookRescuer rescuerId={rescuer.id} key={rescuer.id} />
             </div>
           ))
         )}

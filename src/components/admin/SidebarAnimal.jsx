@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Dashboard from '../Dashboard';
+import axios from 'axios';
 
 const SidebarAnimal = () => {
     const [animals, setAnimals] = useState([]);
@@ -8,11 +9,16 @@ const SidebarAnimal = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/animal`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${url}/animal`, {
+          headers: {
+            Authorization: token
+       },
+    })
+        // if (!response.ok) {
+        //   throw new Error("Network response was not ok");
+        // }
+        const data = await response.data;
         setAnimals(data); // Assuming data is an array
       } catch (error) {
         console.log("Error fetching animals:", error);
@@ -26,8 +32,8 @@ const SidebarAnimal = () => {
 
   return (
     <>
-    <Dashboard>
-    <div className="container vh-100">
+    
+    <div className="container md-3 vh-100">
       <div className="row mb-4">
         {animals.length > 0 ? (
           animals.map(({ animalType, adoptable }, index) => (
@@ -55,7 +61,7 @@ const SidebarAnimal = () => {
       </div>
       {/* <AnimalModal/> */}
     </div>
-    </Dashboard>
+    
     </>
   );
 };

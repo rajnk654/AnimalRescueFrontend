@@ -5,7 +5,7 @@ import person1 from '../../assets/person1.jpg'
 
 const FosterCare = () => {
     return (
-        <Dashboard>
+        
             <div className='container py-md-3 mt-md-3 vh-100'>
                 <div className="row">
                     <div className="col">
@@ -14,7 +14,7 @@ const FosterCare = () => {
                     </div>
                 </div>
             </div>
-        </Dashboard>
+        
     )
 }
 

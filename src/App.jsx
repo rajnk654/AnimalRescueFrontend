@@ -26,6 +26,11 @@ import FosterCarePage from "./components/FosterCarePage";
 import FosterCare from "./components/admin/FosterCare";
 import Profile from "./components/User/Profile";
 import RescuerPrifile from "./components/User/RescuerPrifile";
+import FosterCareSideBar from "./components/FosterCare/FosterCareSideBar";
+import AnimalsInFosterCare from "./components/FosterCare/AnimalsInFosterCare";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminPrivateRoute from "./routes/AdminRoute";
+import Unauthorized from "./components/Pages/Unauthorized";
 
 
 
@@ -44,35 +49,43 @@ function App() {
   }, []);
   return (
     <>
-     
-        <Layout>
 
-          <Routes>
-            < Route path="/" element={<Home />} />
-            <Route path="/rescuer" element={<RescuerPage />} />
-            < Route path="/about" element={<About />} />
-            < Route path="/contact" element={<Contact />} />
-            < Route path="/Signin" element={<Signin />} />
-            < Route path="/userSignUp" element={<UserSignUp />} />
-            <Route path="admin" element={<Admin />} />
-            < Route path="/rescuerSignUp" element={<RescuerSignUp />} />
-            < Route path="/adoptAnimal" element={<AdoptAnimal />} />
-            <Route path="/blogPage" element={<BlogPage />} />
-            <Route path="/animalRegistration" element={<AnimalRegistration />} />
-            <Route path="/animalModal" element={<AnimalModal />} />
-            <Route path="/admin/rescuers" element={<SidebarRescuer/>} />
-            <Route path="/admin/animals" element={<SidebarAnimal/>}/>
-            <Route path="/sidebar" element={<SideBar/>}/>
-            <Route path="/order" element={<Order/>}/>
-            <Route path="/userSidebar" element={<UserSidebar/>}/>
-            <Route path="/admin/fosterCare" element={<FosterCare/>}/>
-            <Route path="/userProfile" element={<Profile/>}/>
-            <Route path="/rescuerProfile" element={<RescuerPrifile/>}/>
-            {/* <Route path="/rescuer"element={<PrivateRoute/>}/> */}
+      <Layout>
 
-          </Routes>
+        <Routes>
+          < Route path="/" element={<Home />} />
+          <Route path="/rescuer" element={<RescuerPage />} />
+          < Route path="/about" element={<About />} />
+          < Route path="/contact" element={<Contact />} />
+          < Route path="/Signin" element={<Signin />} />
+          < Route path="/userSignUp" element={<UserSignUp />} />
+          <Route path="/admin/signup" element={<Admin />} />
+          < Route path="/rescuerSignUp" element={<RescuerSignUp />} />
+          < Route path="/adoptAnimal" element={<AdoptAnimal />} />
+          <Route path="/blogPage" element={<BlogPage />} />
+          <Route path="/animalRegistration" element={<AnimalRegistration />} />
+          <Route path="/animalModal" element={<AnimalModal />} />
 
-        </Layout>
+      
+          <Route path="admin" element={<AdminPrivateRoute />}>
+            <Route path="rescuer" element={<SidebarRescuer />} />
+            <Route path="animals" element={<SidebarAnimal />} />
+            <Route path="fosterCare" element={<FosterCare />} />
+          </Route>
+
+          <Route path="/unauthorized" element={<Unauthorized/>}/>
+          <Route path="/sidebar" element={<SideBar />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/userSidebar" element={<UserSidebar />} />
+          <Route path="/userProfile" element={<Profile />} />
+          <Route path="/rescuerProfile" element={<RescuerPrifile />} />
+          <Route path="/fosterCare" element={<FosterCareSideBar />} />
+          <Route path="/fosterCare/animals" element={<AnimalsInFosterCare />} />
+          {/* <Route path="/rescuer"element={<PrivateRoute/>}/> */}
+
+        </Routes>
+
+      </Layout>
     </>
   );
 }

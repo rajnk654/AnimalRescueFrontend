@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from 'react'
 import './Profile.css'; // Import your CSS for styling
-import Layout from '../layout/Layout';
+
 
 const RescuerPrifile = () => {
     const [user, setUser] = useState(null); // Initially null to handle loading state
@@ -80,7 +80,7 @@ const RescuerPrifile = () => {
     return <div className="loading">Loading...</div>; // Show loading state while fetching data
   }
   return (
-    <Layout>
+   
       <div className="profile-page-container py-md-3 mt-md-3">
         <div className="profile-card">
           <div className="profile-header">
@@ -145,7 +145,6 @@ const RescuerPrifile = () => {
           </div>
         </div>
       </div>
-    </Layout>
   );
 };
   

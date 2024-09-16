@@ -5,6 +5,32 @@ import axios from 'axios';
 const Signin = () => {
 
   const navigate = useNavigate();
+
+
+
+  const signInWithGoogle = () => {
+    try {
+        const signInURL = "http://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fv1%2Fuser%2FsignInWithGoogle&response_type=code&client_id=891906603364-pl6phg11ggdsgvn0482fuc4qjq5tmpgh.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&access_type=offline";
+        const signInWindow = window.open(
+            signInURL,
+            "google login",
+            "toolbar=no, menubar=no, width=700, height=700, top=100, left=300"
+        );
+  
+        if (signInWindow) {
+            const interval = setInterval(() => {
+                if (signInWindow.closed) {
+                    clearInterval(interval);
+                    navigate('/about');
+                }
+            }, 1000);
+        }
+  
+    } catch (error) {
+        console.error('Error during Google sign-in:', error);
+        window.alert('An error occurred during Google sign-in. Please try again.');
+      }
+    };
   // State to hold form input values
   // const [user, setUser] = useState({
   //   email: '',
@@ -88,15 +114,7 @@ const Signin = () => {
       // setResponseMessage('Error occurred while creating user');
     }
   };
-  // Google sign-in
-  const signInWithGoogle = (event) => {
-    window.open(
-      "http://localhost:8080/realms/ANIMALRESCUE/protocol/openid-connect/auth?response_type=code&client_id=ARFE&kc_idp_hint=google",
-      "google login",
-      "toolbar=no, menubar=no, width=700, height=700, top=100, left=300"
-    );
-  };
-
+  
   return (
     <>
 

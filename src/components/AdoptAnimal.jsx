@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import AnimalModal from './AnimalModal'
+//import AnimalModal from './AnimalModal'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const AdoptAnimal = () => {
   const [animals, setAnimals] = useState([]);
@@ -11,11 +12,14 @@ const AdoptAnimal = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${url}/animal`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`${url}/animal`, {
+          headers: {
+            Authorization: token
+          }
+        })
+        
+        const data = response.data;
         setAnimals(data); // Assuming data is an array
       } catch (error) {
         console.log("Error fetching animals:", error);
@@ -29,7 +33,10 @@ const AdoptAnimal = () => {
 
   const handleMoreDetailsClick = () => {
     navigate(`/AnimalModal`);
+    navigate(`/AnimalRegistration`)
   };
+
+  
 
   return (
     <div className="container py-md-5 mt-md-3">
@@ -45,9 +52,9 @@ const AdoptAnimal = () => {
                   <h6 className="card-title text-center">Animal Type: {animalType}</h6>
                   <h6 className="card-title text-center">Adoptable: {adoptable ? "Yes" : "No"}</h6>
                   <div className="d-grid mx-auto">
-                  <button type="button" class="btn btn-warning" onClick={() => handleMoreDetailsClick()}
-                    >More Details</button><br/>
-                    <button type="button" className="btn btn-primary">Request For Adoption</button>
+                    <button type="button" class="btn btn-warning" onClick={() => handleMoreDetailsClick()}
+                    >More Details</button><br />
+                    <button type="button" className="btn btn-primary" onClick={() => handleMoreDetailsClick()}>Request For Adoption</button>
 
                   </div>
                 </div>
@@ -60,7 +67,7 @@ const AdoptAnimal = () => {
       </div>
       {/* <AnimalModal/> */}
     </div>
-    
+
   );
 };
 

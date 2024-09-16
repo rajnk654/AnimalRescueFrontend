@@ -1,34 +1,47 @@
-import React from 'react'
-import RegistrationForm from './RegistrationForm'
-import ContactInfo from './ContactInfo'
+import React, { useRef, useState } from 'react'
+import ReCAPTCHA from "react-google-recaptcha";
+import axios from 'axios';
 
 const Contact = () => {
+  const captchaRef = useRef(null);
+
+  const [disableSubmit, setSubmitbutton] = useState(true);
+
+  const [contact, setUser] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    message: "",
+    token: ""
+  });
+
+  const handleChange = async (event) => {
+    const { name, value } = event.target;
+    setUser((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const tokenValue = captchaRef.current.getValue();
+    setUser((prevData) => ({ ...prevData, token: tokenValue }));
+    console.log(contact,);
+
+    const url = import.meta.env.VITE_ANIMAL_RESCUE_URL;
+
+    try {
+      const response = await axios.post(`${url}/contact`, contact)
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    // captchaRef.current.reset();
+
+  }
+
+
   return (
     <>
-      {/* <div className='container mt-4'>
-        <div className="row">
-          <div className="col-md-12 ">
-            <img src="CntactUs.jpg" className="img-fluid border rounded w-100" alt="" />
-          </div>
-        </div>
-      </div>
-      <div className="container mt-3">
-        <div className="d-flex">
-          
-          <div className="flex-fill">
-            <RegistrationForm />
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="container">
-          <div className="row justify-content-md-center">
-            <div className="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
-              <h2 className="mb-4 display-5 text-center">Need Help</h2>
-              <p className="text-secondary mb-5 text-center lead fs-4">Our team is available to provide prompt and helpful responses to all inquiries. You can reach us via phone, email, or by filling out the contact form below.</p>
-              <hr className="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle" />
-            </div>
-          </div>
-        </div> */}
 
       <section className="py-3 py-md-5 py-xl-8" style={{ backgroundColor: 'dark' }}>
         <div className="container-fluid py-md-2 mt-md-1">
@@ -161,10 +174,10 @@ const Contact = () => {
                                   Full Name <span className="text-danger">*</span>
                                 </label>
                                 <input
-                                  type="text"
+                                  type="text" onChange={(e) => handleChange(e)}
                                   className="form-control"
                                   id="fullname"
-                                  name="fullname"
+                                  name="fullName"
                                   required
                                 />
                               </div>
@@ -186,7 +199,7 @@ const Contact = () => {
                                     </svg>
                                   </span>
                                   <input
-                                    type="email"
+                                    type="email" onChange={(e) => handleChange(e)}
                                     className="form-control"
                                     id="email"
                                     name="email"
@@ -195,7 +208,7 @@ const Contact = () => {
                                 </div>
                               </div>
                               <div className="col-12 col-md-6">
-                                <label htmlFor="phone" className="form-label">
+                                <label htmlFor="phoneNumber" className="form-label">
                                   Phone Number
                                 </label>
                                 <div className="input-group">
@@ -212,10 +225,10 @@ const Contact = () => {
                                     </svg>
                                   </span>
                                   <input
-                                    type="tel"
+                                    type="tel" onChange={(e) => handleChange(e)}
                                     className="form-control"
                                     id="phone"
-                                    name="phone"
+                                    name="phoneNumber"
                                   />
                                 </div>
                               </div>
@@ -223,7 +236,7 @@ const Contact = () => {
                                 <label htmlFor="message" className="form-label">
                                   Message <span className="text-danger">*</span>
                                 </label>
-                                <textarea
+                                <textarea onChange={(e) => handleChange(e)}
                                   className="form-control"
                                   id="message"
                                   name="message"
@@ -231,15 +244,23 @@ const Contact = () => {
                                   required
                                 ></textarea>
                               </div>
+                              <ReCAPTCHA
+                                sitekey="6LfuuD4qAAAAAG7HUE46H8OpgVuT_zakXEvaJkO_"
+                                ref={captchaRef}
+                                onChange={() => setSubmitbutton(false)}
+                              />
                               <div className="col-12 text-center">
                                 <button
                                   type="submit"
                                   className="btn btn-primary w-100"
+                                  onClick={(e) => handleSubmit(e)}
+                                  disabled={disableSubmit}
                                 >
-                                  Send Message
+                                  Submit
                                 </button>
                               </div>
                             </div>
+
                           </form>
                         </div>
                       </div>

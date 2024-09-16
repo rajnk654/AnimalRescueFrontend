@@ -1,10 +1,11 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const AnimalRegistrationForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         gender: '',
-        adoptionStatus: '',
+        status: '',
         rescueDate: '',
         photos: null,
         description: ''
@@ -21,9 +22,25 @@ const AnimalRegistrationForm = () => {
     const handleFileChange = (e) => {
         setFormData({ ...formData, photos: e.target.files[0] });
     };
+    const url = import.meta.env.VITE_ANIMAL_RESCUE_URL;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        try {
+            const token = localStorage.getItem("token");
+            const response = await axios.post(`${url}/animal/rescuer-Id/1/fosterCare-Id/2`,formData, {
+                headers: {
+                  Authorization: token
+                  // "Content-Type": "application/json",
+                },
+              });
+              if (Response) {
+                console.log(response.data)
+              }
+        } catch (error) {
+         console.log(error);   
+        }
         // Submit the form data to the server or any backend service
         console.log(formData);
     };
@@ -31,7 +48,7 @@ const AnimalRegistrationForm = () => {
     return (
         <>
             <div className="container">
-                <div className="container mt-5">
+                <div className="container mt-5 ">
                     <h1 className="text-center">Animal Registration</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group mb-3">
@@ -62,16 +79,16 @@ const AnimalRegistrationForm = () => {
                         </div>
 
                         <div className="form-group mb-3">
-                            <label htmlFor="adoptionStatus">Adoption Status</label>
+                            <label htmlFor="status">Adoption Status</label>
                             <select
                                 className="form-control"
-                                id="adoptionStatus"
-                                name="adoptionStatus"
-                                value={formData.adoptionStatus}
+                                id="status"
+                                name="status"
+                                value={formData.status}
                                 onChange={handleInputChange}
                             >
                                 <option value="">Select</option>
-                                <option value="available">Available</option>
+                                <option value="rescued">Rescued</option>
                                 <option value="adopted">Adopted</option>
                             </select>
                         </div>

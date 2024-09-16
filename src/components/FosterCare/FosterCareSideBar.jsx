@@ -4,14 +4,16 @@ import
   BsListCheck, BsMenuButtonWideFill, BsFillGearFill}
  from 'react-icons/bs'
 import { Link } from 'react-router-dom'
-import './SideBar.css'
+import '../SideBar.css'
+import Dashboard from '../Dashboard'
 
-function Sidebar({openSidebarToggle, OpenSidebar}) {
+
+function FosterCareSidebar({openSidebarToggle, OpenSidebar}) {
     return (
       <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive": ""}>
           <div className='sidebar-title'>
               <div className='sidebar-brand'>
-                  <BsCart3  className='icon_header'/> Admin Dashboard
+                  {/* <BsCart3  className='icon_header'/> */}
               </div>
               <span className='icon close_icon' onClick={OpenSidebar}>X</span>
           </div>
@@ -27,34 +29,16 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                       <BsFillArchiveFill className='icon'/> Animals
                   </Link>
               </li>
-              <li className='sidebar-list-item'>
-                  <Link to="/admin/rescuer">
-                      <BsFillGrid3X3GapFill className='icon'/> Rescuer
-                  </Link>
-              </li>
-              <li className='sidebar-list-item'>
-                  <Link to="/">
-                      <BsPeopleFill className='icon'/> Adopters
-                  </Link>
-              </li>
-              <li className='sidebar-list-item'>
-                  <Link to="/admin/fosterCare">
-                      <BsListCheck className='icon'/> Foster Care
-                  </Link>
-              </li>
+              
               <li className='sidebar-list-item'>
                   <Link to="/employee/order">
                       <BsListCheck className='icon'/>Notifications
                   </Link>
               </li>
+              
               <li className='sidebar-list-item'>
                   <Link to="">
-                      <BsMenuButtonWideFill className='icon'/> Reports
-                  </Link>
-              </li>
-              <li className='sidebar-list-item'>
-                  <Link to="">
-                      <BsFillGearFill className='icon'/> Setting
+                      <BsFillGearFill className='icon'/> LogOut
                   </Link>
               </li>
           </ul>
@@ -62,4 +46,4 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
     )
   }
 
-export default Sidebar
+export default FosterCareSidebar

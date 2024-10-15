@@ -34,6 +34,10 @@ import Unauthorized from "./components/Pages/Unauthorized";
 import AnimalAdoption from "./components/Payment/AnimalAdoption";
 
 import FosterCareAnimalsPage from "../src/components/FosterCare/FosterCareAnimalsPage"
+import AdminProfile from "./components/admin/AdminProfile";
+import GetQueries from "../src/components/admin/GetQueries";
+import ForgotPassword from "./Registration/ForgotPassword";
+//import DisplayAnimalInFostercare from "./components/FosterCare/DisplayAnimalInFostercare";
 
 
 
@@ -69,13 +73,16 @@ function App() {
           <Route path="/animalRegistration" element={<AnimalRegistration />} />
           <Route path="/animalModal" element={<AnimalModal />} />
           <Route path="animalAdoption" element={<AnimalAdoption/>}/>
+          <Route path="/forgot-password" element={<ForgotPassword/>}/>
 
       
           <Route path="admin" element={<AdminPrivateRoute />}>
-            <Route index element={<SidebarRescuer />} />
+            <Route index element={<Profile />} />
             <Route path="rescuers" element={<SidebarRescuer />} />
             <Route path="animals" element={<SidebarAnimal />} />
             <Route path="fosterCare" element={<FosterCare />} />
+            <Route path="query" element={<GetQueries />} />
+            
             <Route path="fosterCare/viewDetails" element={<FosterCareAnimalsPage />} />
           </Route>
 
@@ -87,6 +94,7 @@ function App() {
           <Route path="/rescuerProfile" element={<RescuerPrifile />} />
           <Route path="/fosterCare" element={<FosterCareSideBar />} />
           <Route path="/fosterCare/animals" element={<AnimalsInFosterCare />} />
+          {/* <Route path="/fosterCare/animalsFoster" element={<DisplayAnimalInFostercare/>}/> */}
           {/* <Route path="/rescuer"element={<PrivateRoute/>}/> */}
 
         </Routes>

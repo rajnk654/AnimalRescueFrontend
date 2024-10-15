@@ -110,7 +110,7 @@ const [rescuers, setRescuers] = useState([]);
   return (
     <div className="container vh-100 mt-md-5 py-md-3">
       <div className="row mb-5">
-        <div className="col-md-6">
+        {/* <div className="col-md-6">
           <input
             type="text"
             className="form-control"
@@ -118,7 +118,7 @@ const [rescuers, setRescuers] = useState([]);
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)} 
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="row">
@@ -133,8 +133,7 @@ const [rescuers, setRescuers] = useState([]);
                 <div className="col-md-4">
                  {/* Display image with fallback if the primary image fails */}
                  <img
-                    src="/pavan.jpg"  // Default image
-                    onError={(e) => e.target.src = "/fallback.jpg"}  // Fallback image
+                    src={rescuer.userDto?.firstName} // Default image
                     alt="Rescuer"
                     className="img-fluid rounded-start"
                   />

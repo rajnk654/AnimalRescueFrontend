@@ -3,6 +3,10 @@
   padding: 0;
   box-sizing: border-box; 
  }
+
+ .hide-scroll::-webkit-scrollbar {
+  display: none;                 /* Hides scrollbar in Chrome, Safari, and Edge */
+}
  /* .navbar {
   display: flex;
   justify-content: flex-end;

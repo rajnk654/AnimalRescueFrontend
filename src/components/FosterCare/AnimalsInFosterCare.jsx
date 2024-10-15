@@ -73,6 +73,12 @@ const AnimalsInFosterCare = ({ fosterCareId, fosterCareName }) => {
                   <strong>RescueDate:</strong> {animal.rescueDate} <br />
                   {/* <strong>Adoptable:</strong> {animal.true} <br /> */}
                   <strong> Status:</strong> {animal.status} <br />
+                  <button
+                    className="btn btn-danger btn-sm mt-2"
+                    onClick={() => deleteAnimal(animal.id)}
+                  >
+                    Delete
+                  </button>
                   <hr />
                 </li>
               ))}

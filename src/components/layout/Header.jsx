@@ -1,23 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { useAuth } from "../../Context/auth";
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  updateAuth({
-    username: null,
-    token: null,
-    userId: null,
-    role: null,
-  });
 
-  navigate("/"); // Redirect immediately after logout
-};
 
 const Header = () => {
-  const [auth] = useAuth();
+  const [auth, updateAuth] = useAuth();
+  const [logOut, setLogout] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    updateAuth({
+      username: null,
+      token: null,
+      userId: null,
+      role: null,
+    });
+    setLogout(true);
+    navigate("/"); // Redirect immediately after logout
+    window.alert("User Logged Out")
+  };
+
+  // const[auth] = updateAuth();
   const [profileUrl, setProfileUrl] = useState(
     "https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png"
   );

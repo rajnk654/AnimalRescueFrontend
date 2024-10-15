@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import AnimalAdoption from './Payment/AnimalAdoption';
+//import { ToastContainer } from 'react-toastify';
 
 const AnimalModal = () => {
 
@@ -13,6 +14,7 @@ const AnimalModal = () => {
       };
     return (
         <>
+        
             <div className="container w-50">
                 <div className="card">
                     <div className="card-body">

@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Right */}
           {/* Section: Social media */}
           {/* Section: Links  */}
-          <section className>
+          <section >
             <div className="container text-center text-md-start mt-5">
               {/* Grid row */}
               <div className="row mt-3">
@@ -67,16 +67,16 @@ const Footer = () => {
                   <p><i className="fas fa-phone me-3" /> + 91 9449938328</p>
                   <p><i className="fas fa-print me-3" /> + 01 234 567 89</p>
                   <div>
-                    <a href className="me-4 text-reset">
+                    <a className="me-4 text-reset">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a href className="me-4 text-reset">
+                    <a className="me-4 text-reset">
                       <i className="fab fa-twitter" />
                     </a>
-                    <a href className="me-4 text-reset">
+                    <a className="me-4 text-reset">
                       <i className="fab fa-google" />
                     </a>
-                    <a href className="me-4 text-reset">
+                    <a className="me-4 text-reset">
                       <i className="fab fa-instagram" />
                     </a>
                   </div>

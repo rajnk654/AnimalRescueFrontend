@@ -41,20 +41,7 @@ const AuthProvider = ({ children }) => {
     }
   });
 
-  useEffect(() =>{
-    const fetchUser = async () =>{
-      const response = await axios.get(`http://localhost:8080/api/v1/user/${auth?.email}`,{
-        headers : {
-          Authorization : auth?.token
-        }
-      });
-      const data = response.data;
-      setAuth({ ... auth, userId : data.id});
-    }
-    fetchUser();
-  },[])
-
-  const updateAuth = (newAuth) => {
+    const updateAuth = (newAuth) => {
     if (newAuth && newAuth.token) {
       try {
         localStorage.setItem("token", newAuth.token);

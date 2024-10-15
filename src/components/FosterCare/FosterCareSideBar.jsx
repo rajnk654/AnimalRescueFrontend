@@ -25,8 +25,8 @@ function FosterCareSidebar({openSidebarToggle, OpenSidebar}) {
                   </Link>
               </li>
               <li className='sidebar-list-item'>
-                  <Link to="/admin/animals">
-                      <BsFillArchiveFill className='icon'/> Animals
+                  <Link to="/fosterCare">
+                      <BsFillArchiveFill className='icon'/> FosterCare
                   </Link>
               </li>
               

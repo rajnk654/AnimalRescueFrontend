@@ -11,15 +11,18 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
       <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive": ""}>
           <div className='sidebar-title'>
               <div className='sidebar-brand'>
-                  <BsCart3  className='icon_header'/> Admin Dashboard
+                  {/* <BsCart3  className='icon_header'/> Admin Dashboard */}
               </div>
-              <span className='icon close_icon' onClick={OpenSidebar}>X</span>
+              {/* <span className='icon close_icon' onClick={OpenSidebar}>X</span> */}
           </div>
   
           <ul className='sidebar-list'>
-              <li className='sidebar-list-item'> 
-                      <BsGrid1X2Fill className='icon'/> Admin Dashboard
+              <li className='sidebar-list-item'>
+                <Link to="/userProfile" >
+                      <BsGrid1X2Fill className='icon'/>Admin Profile
+                      </Link>
               </li>
+              
               <li className='sidebar-list-item'>
                   <Link to="/admin/animals">
                       <BsFillArchiveFill className='icon'/> Animals
@@ -40,21 +43,21 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                       <BsListCheck className='icon'/> Foster Care
                   </Link>
               </li>
-              <li className='sidebar-list-item'>
+              {/* <li className='sidebar-list-item'>
                   <Link to="/employee/order">
                       <BsListCheck className='icon'/>Notifications
                   </Link>
-              </li>
+              </li> */}
               <li className='sidebar-list-item'>
-                  <Link to="">
+                  <Link to="/admin/query">
                       <BsMenuButtonWideFill className='icon'/> Reports
                   </Link>
               </li>
-              <li className='sidebar-list-item'>
+              {/* <li className='sidebar-list-item'>
                   <Link to="">
                       <BsFillGearFill className='icon'/> Setting
                   </Link>
-              </li>
+              </li> */}
           </ul>
       </aside>
     )

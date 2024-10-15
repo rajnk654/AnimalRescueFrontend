@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Signin = () => {
 
@@ -8,76 +9,63 @@ const Signin = () => {
 
 
 
-  const signInWithGoogle = () => {
-    try {
-        const signInURL = "http://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fv1%2Fuser%2FsignInWithGoogle&response_type=code&client_id=891906603364-pl6phg11ggdsgvn0482fuc4qjq5tmpgh.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&access_type=offline";
-        const signInWindow = window.open(
-            signInURL,
-            "google login",
-            "toolbar=no, menubar=no, width=700, height=700, top=100, left=300"
-        );
-  
-        if (signInWindow) {
-            const interval = setInterval(() => {
-                if (signInWindow.closed) {
-                    clearInterval(interval);
-                    navigate('/about');
-                }
-            }, 1000);
-        }
-  
-    } catch (error) {
-        console.error('Error during Google sign-in:', error);
-        window.alert('An error occurred during Google sign-in. Please try again.');
-      }
-    };
-  // State to hold form input values
-  // const [user, setUser] = useState({
-  //   email: '',
-  //   password: ''
-  // });
-
-  // // Handle form field changes
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setUser({ ...user, [name]: value });
-  // };
-
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
+  // const signInWithGoogle = () => {
   //   try {
-  //     const response = await axios.post("http://localhost:8080/api/v1/user/signIn", {
-  //       email: user.email,
-  //       password: user.password
-  //     }, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       }
-  //     });
+  //       const signInURL = "http://accounts.google.com/o/oauth2/v2/auth?redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fapi%2Fv1%2Fuser%2FsignInWithGoogle&response_type=code&client_id=891906603364-pl6phg11ggdsgvn0482fuc4qjq5tmpgh.apps.googleusercontent.com&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&access_type=offline";
+  //       const signInWindow = window.open(
+  //           signInURL,
+  //           "google login",
+  //           "toolbar=no, menubar=no, width=700, height=700, top=100, left=300"
+  //       );
 
-  //     if (response) {
-  //       // Assuming the token is in the response headers (adjust based on your API)
-  //       const token = response.data.token; // Adjust if token is in a different field
-  //       localStorage.setItem("token", token);
-  //       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  //       console.log(token);
-  //     } else {
-  //       alert("Error in registration");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
+  const googleLogin = useGoogleLogin({
+    onSuccess: (codeResponse) => signInWithGoogle(codeResponse),
+    onError: (error) => toast.error("Google login failed. Please try again."),
+  });
 
-  // // Google sign-in
-  // const signInWithGoogle = (event) => {
-  //   window.open(
-  //     "http://localhost:8080/realms/ANIMALRESCUE/protocol/openid-connect/auth?response_type=code&client_id=ARFE&kc_idp_hint=google",
-  //     "google login",
-  //     "toolbar=no, menubar=no, width=700, height=700, top=100, left=300"
-  //   );
-  // };
+  const signInWithGoogle = async (codeResponse) => {
+    try {
+      const requestBody = {
+        accessToken: codeResponse?.access_token,
+      };
+      const response = await axios
+        .post(`http://localhost:8080/api/v1/user/signInWithGoogle`, requestBody)
+        .catch((err) => {
+          console.error(err);
+          Windows.error("An error occurred during login. Please try again.");
+        });
+
+      if (response?.status === 200) {
+        console.log(response);
+        window.alert("Logged in Successfully.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        const token = response.headers["access_token"];
+        localStorage.setItem("token", token);
+        // Update auth context state
+        updateAuth({
+          token: token,
+          username: "",
+          role: "",
+        });
+        setTimeout(() => {
+          setUser(null);
+          navigate("/");
+        }, 3000);
+      } else if (response?.status === 401) {
+        window.alert("Enter valid Credentials...!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
+    } catch (error) {
+      Windows.error("An error occurred during login. Please try again.");
+    }
+  };
+  
+  
+ 
   const [user, setUser] = useState({
     email: '',
     password: ''
@@ -146,10 +134,10 @@ const Signin = () => {
                         <a className="small text-muted" href="#!">Forgot password?</a>
                         <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>Don't have an account? <Link to="/UserSignUp" style={{ color: '#393f81' }}>Register here</Link></p>
                         <a className="small text-muted" href="#!">OR</a><br />
-                        <button onClick={signInWithGoogle} className="btn btn-lg btn-block btn-primary" style={{ backgroundColor: '#dd4b39' }} type="submit">
-                          <i className="fab fa-google me-2" /> Sign in with Google
-                        </button><br />
                       </form>
+                      <button onClick={() => googleLogin()} className="btn btn-lg btn-block btn-primary" style={{ backgroundColor: '#dd4b39' }} type="submit">
+                          <i className="fab fa-google me-2" /> Sign in with Google
+                        </button>
                     </div>
                   </div>
                 </div>

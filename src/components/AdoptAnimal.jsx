@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 //import AnimalModal from './AnimalModal'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import AnimalAdoption from './Payment/AnimalAdoption';
 
 const AdoptAnimal = () => {
   const [animals, setAnimals] = useState([]);
@@ -31,9 +32,9 @@ const AdoptAnimal = () => {
 
   console.log(animals);
 
-  const handleMoreDetailsClick = () => {
-    navigate(`/AnimalModal`);
-    navigate(`/AnimalRegistration`)
+  const handleMoreDetailsClick = (id, animalType, adoptable ) => {
+    const data = {id, animalType, adoptable }
+    navigate(`/AnimalModal`, {state : data});
   };
 
   
@@ -42,7 +43,7 @@ const AdoptAnimal = () => {
     <div className="container py-md-5 mt-md-3">
       <div className="row mb-4">
         {animals.length > 0 ? (
-          animals.map(({ animalType, adoptable }, index) => (
+          animals.map(({id, animalType, adoptable }, index) => (
             <div className="col-md-3" key={index}>
               <div className="card">
                 <img src="Dog.jpg" className="card-img-top" alt="Animal" />
@@ -52,9 +53,9 @@ const AdoptAnimal = () => {
                   <h6 className="card-title text-center">Animal Type: {animalType}</h6>
                   <h6 className="card-title text-center">Adoptable: {adoptable ? "Yes" : "No"}</h6>
                   <div className="d-grid mx-auto">
-                    <button type="button" class="btn btn-warning" onClick={() => handleMoreDetailsClick()}
+                    <button type="button" class="btn btn-warning" onClick={() => handleMoreDetailsClick(id, animalType, adoptable )}
                     >More Details</button><br />
-                    <button type="button" className="btn btn-primary" onClick={() => handleMoreDetailsClick()}>Request For Adoption</button>
+                    <AnimalAdoption animalId={id}/>
 
                   </div>
                 </div>

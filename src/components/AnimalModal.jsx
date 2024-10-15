@@ -1,10 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import AnimalAdoption from './Payment/AnimalAdoption';
 
 const AnimalModal = () => {
+
+    const location = useLocation();
+    const data = location.state;
     const navigate = useNavigate();
-
-
 
     const handleMoreDetailsClick = () => {
         navigate(`/AdoptAnimal`);
@@ -31,7 +33,7 @@ const AnimalModal = () => {
                             <div className="col "></div>
                             <div className="col mt-n2">
                                 <button type="button" className="btn btn-info mx-4" onClick={() => handleMoreDetailsClick()}>Back</button>
-                                <button type="button" className="btn btn-primary mx-2"> Adoption</button>
+                                <AnimalAdoption animalId={data?.id}/>
                                 </div>
                         </div>
                     </div>  

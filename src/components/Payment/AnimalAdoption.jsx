@@ -1,22 +1,24 @@
 import axios from 'axios';
 import React from 'react'
-import { useAuth } from '../Context/auth';
 import Razorpay from 'razorpay';
+import { useAuth } from '../../Context/auth';
 
-const BookRescuer = ({rescuerId}) => {
+
+const AnimalAdoption = ({animalId}) => {
     const[auth]=useAuth();
 
+    console.log(auth)
     const token = localStorage.getItem("token") || null;
 
     async function createOrder() {
         console.log("order creation started");
         const orderBody = {
-            amount: 500,
+            amount: 1000,
             currency: 'INR',
             userId : 152,
-            rescuerId : rescuerId
+            animalId : animalId
         };
-        const response = await axios.post("http://localhost:8080/api/v1/order/create-order",orderBody, {
+        const response = await axios.post("http://localhost:8080/api/v1/adopt/adopt-animal",orderBody, {
             headers: {
                 Authorization : token,
                 'Content-Type': 'application/json'
@@ -55,12 +57,12 @@ const BookRescuer = ({rescuerId}) => {
 
         const rzp1=new window.Razorpay(options);
         rzp1.open();
-    };
+    }
   return (
     <div>
-      <button onClick={createOrder} className='btn btn-primary'>Book Rescuer</button>
+      <button onClick={createOrder} className='btn btn-primary'>Adopt Animal</button>
     </div>
   )
 }
 
-export default BookRescuer
+export default AnimalAdoption

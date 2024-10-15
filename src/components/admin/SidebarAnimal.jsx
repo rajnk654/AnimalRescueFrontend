@@ -39,7 +39,13 @@ const SidebarAnimal = () => {
           animals.map(({ animalType, adoptable }, index) => (
             <div className="col-md-3" key={index}>
               <div className="card">
-                <img src="Dog.jpg" className="card-img-top" alt="Animal" />
+                {/* Display image with fallback if the primary image fails */}
+                  <img
+                    src="/Dog.jpg"  // Default image
+                    onError={(e) => e.target.src = "/fallback.jpg"}  // Fallback image
+                    alt="Animal"
+                    className="img-fluid rounded-start"
+                  />
                 <div className="card-body">
                   <h5 className="card-title text-center">Animal Details</h5>
                   <h6 className="card-title text-center">Price: ₹500</h6>

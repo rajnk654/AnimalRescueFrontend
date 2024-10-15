@@ -30,13 +30,14 @@ const Profile = () => {
   useEffect(() => {
     // Fetch user data from the backend
     const fetchUserData = async () => {
+      console.log("Hii");
       try {
-        const response = await axios.get(`${url}/user/${auth?.userId}`, {
+        const response = await axios.get(`${url}/user/${auth?.email}`, {
           headers: {
             Authorization: auth?.token,
           },
         });
-        const data = response.data;
+        const data = response?.data;
         setUser(data);
 
         setLoading(false); // Stop loading once the data is fetched
@@ -47,7 +48,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [user,loading]);
+  }, []);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -71,7 +72,7 @@ const Profile = () => {
     try {
       // Send updated user data to the server
 
-      const response = await axios.put(`${url}/user/${userId}`,formData, {
+      const response = await axios.put(`${url}/user/${auth?.userId}`,formData, {
           headers: {
             "Content-Type": "application/json",
              Authorization: token
@@ -79,9 +80,8 @@ const Profile = () => {
         }
       );
 
-      if (response.ok) {
-        setUser(formData); // Update the user state with new data
-
+      if (response) {
+        setUser(response.data); // Update the user state with new data
         setIsEditing(false);
       } else {
         console.error("Error updating user profile");
@@ -124,19 +124,19 @@ const Profile = () => {
 
               <p className="profile-email">
                 <strong>Email :</strong>{" "}
-                {user ? user.emailId : "user@gmail.com"}
+                {user ? user.email : "user@gmail.com"}
               </p>
               <p className="profile-phoneNumber">
                 <strong>Mobile :</strong>{" "}
                 {user ? user.phoneNumber : "phoneNumber data"}
               </p>
 
-              <button className="edit-btn" onClick={handleEdit}>
+              <button className="edit-btn" onClick={() => handleEdit()}>
                 Edit Profile
               </button>
             </div>
           ) : (
-            <form className="edit-form" onSubmit={handleSubmit}>
+            <form className="edit-form" onSubmit={() => handleSubmit()}>
               <div className="form-group">
                 <label htmlFor="fullName">Name:</label>
 
@@ -145,7 +145,7 @@ const Profile = () => {
                   id="fullName"
                   name="fullName"
                   defaultValue={user.fullName}
-                  onChange={handleChange}
+                  onChange={() => handleChange()}
                   required
                 />
               </div>
@@ -158,7 +158,7 @@ const Profile = () => {
                   id="email"
                   name="emailId"
                   defaultValue={user.emailId}
-                  onChange={handleChange}
+                  onChange={() => handleChange()}
                   required
                 />
               </div>
@@ -171,7 +171,7 @@ const Profile = () => {
                   id="phoneNumber"
                   name="phoneNumber"
                   defaultValue={user.phoneNumber}
-                  onChange={handleChange}
+                  onChange={() => handleChange()}
                   required
                 />
               </div>
@@ -184,7 +184,7 @@ const Profile = () => {
                 <button
                   type="button"
                   className="cancel-btn"
-                  onClick={handleCancel}
+                  onClick={() => handleCancel()}
                 >
                   Cancel
                 </button>
@@ -197,7 +197,7 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default React.memo(Profile);
 
 
 
@@ -258,7 +258,7 @@ export default Profile;
 //     setFormData(user); // Reset form data on cancel
 //   };
 
-//   const handleChange = (e) => {
+//   const () => handleChange = (e) => {
 //     setFormData({
 //       ...formData,
 //       [e.target.name]: e.target.value,
@@ -318,7 +318,7 @@ export default Profile;
 //                     id="name"
 //                     name="name"
 //                     value={formData.name}
-//                     onChange={handleChange}
+//                     onChange={() => handleChange}
 //                     required
 //                   />
 //                 </div>
@@ -330,7 +330,7 @@ export default Profile;
 //                     id="email"
 //                     name="email"
 //                     value={formData.email}
-//                     onChange={handleChange}
+//                     onChange={() => handleChange}
 //                     required
 //                   />
 //                 </div>
@@ -341,7 +341,7 @@ export default Profile;
 //                     id="bio"
 //                     name="bio"
 //                     value={formData.bio}
-//                     onChange={handleChange}
+//                     onChange={() => handleChange}
 //                     required
 //                   />
 //                 </div>

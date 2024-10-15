@@ -1,75 +1,87 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import axios from "axios";
 import FosterCareDashboard from "./FosterCareDashboard";
+import { useAuth } from "../../Context/auth";
 
-const AnimalsInFosterCare = ({ fosterCareId }) => {
-  const [animals, setAnimals] = useState([]);
+const AnimalsInFosterCare = ({ fosterCareId, fosterCareName }) => {
+
+  const [auth] = useAuth();
+    const [animals, setAnimals] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
+  const [showAnimals, setShowAnimals] = useState(false); // State to toggle display of animals
 
-  const url = import.meta.env.VITE_ANIMAL_RESCUE_URL; // API base URL
   console.log(fosterCareId);
-
-  const id = fosterCareId || 0;
-
-  useEffect(() => {
-    const fetchAnimals = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        
-        const response = await axios.get(`${url}/fosterCare/${1}/animals`, {
+  // Function to fetch animals from the foster care
+  const fetchAnimals = async () => {
+    //console.log("hii");
+    try {
+      setLoading(true);
+      const response = await axios.get(
+        `http://localhost:8080/api/v1/fosterCare/${fosterCareId}/animals`,
+        {
           headers: {
-            Authorization: token,
+            "Authorization": auth?.token
           },
-        });
-        
-        setAnimals(response.data); // Assuming 'data' contains the animal list
-      } catch (error) {
-        setError("Failed to fetch animals from foster care.");
+        }
+      );
+      console.log(response.data);
+      // Check if API call is successful and data exists
+      if (response.status === 200 && response.data) {
+        setAnimals(response.data); // Update the animal state
+        setError(""); // Clear any previous errors
+      } else {
+        setError("No animals found in this foster care.");
+        setAnimals([]); // Clear previous animal data
       }
-    };
+    } catch (err) {
+      console.log(err);
+      setError("Failed to fetch animals from foster care.");
+      setAnimals([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  // Function to handle the click event to toggle animal display
+  const handleFosterCareClick = () => {
     fetchAnimals();
-  }, [fosterCareId]);
-
-  if (error) {
-    return <div className="alert alert-danger">{error}</div>;
-  }
+    if (!showAnimals) {
+      // If animals are not displayed, fetch them
+    }
+    setShowAnimals(!showAnimals); // Toggle showAnimals state
+  };
 
   return (
-    <FosterCareDashboard>
-    <div className="container mt-4 vh-100">
-      <h2>Animals in Foster Care</h2>
-      {animals.length > 0 ? (
-        <div className="row">
-          {/* Iterating over animals without map */}
-          {(() => {
-            const animalsList = [];
-            for (let i = 0; i < animals.length; i++) {
-              const animal = animals[i];
-              console.log(animal)
-              animalsList.push(
-                <div key={animal.id} className="col-md-4">
-                  <div className="card mb-4">
-                    <div className="card-body">
-                        
-                      <h5 className="card-title">{animal.animalType}</h5>
-                      <p className="card-text">Gender: {animal.gender}</p>
-                      <p className="card-text"> Adoptable: {animal.adoptable ? "Yes" : "No"}</p>
-                      <p className="card-text"> Status:{animal.status}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-            return animalsList;
-          })()}
+    <div>
+      {/* Foster Care Name and toggle */}
+      <h3 onClick={handleFosterCareClick} style={{ cursor: "pointer", color: "blue" }}>
+        {fosterCareName} {showAnimals ? "▲" : "▼"}
+      </h3>
+
+      {/* Display animals if showAnimals is true */}
+      {showAnimals && (
+        <div>
+          {loading && <div>Loading...</div>}
+          {error && <div>{error}</div>}
+          {!loading && animals.length > 0 && (
+            <ul>
+              {animals.map((animal) => (
+                <li key={animal.id}>
+                  <strong>Name:</strong> {animal.animalType} <br />
+                  <strong>Gender:</strong> {animal.gender} <br />
+                  <strong>RescueDate:</strong> {animal.rescueDate} <br />
+                  {/* <strong>Adoptable:</strong> {animal.true} <br /> */}
+                  <strong> Status:</strong> {animal.status} <br />
+                  <hr />
+                </li>
+              ))}
+            </ul>
+          )}
+          {!loading && animals.length === 0 && !error && <p>No animals found in this foster care.</p>}
         </div>
-      ) : (
-        <p>No animals found in this foster care.</p>
       )}
     </div>
-    </FosterCareDashboard>
   );
 };
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../SideBar.css';
 import FosterCareSidebar from './FosterCareSideBar';
+import { Outlet } from 'react-router-dom';
 
-const FosterCareDashboard = ({ children }) => {
+const FosterCareDashboard = () => {
 
     const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
 
@@ -14,7 +15,7 @@ const FosterCareDashboard = ({ children }) => {
         <div className="grid-container ">
             <FosterCareSidebar openSideBarToggle={openSidebarToggle} OpenSidebar={OpenSidebar} />
             <div className="container">
-                {children}
+                <Outlet/>
             </div>
         </div>
     )

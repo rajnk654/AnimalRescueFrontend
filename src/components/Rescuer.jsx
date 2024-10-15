@@ -21,7 +21,7 @@ const Rescuer = ({ data}) => {
         <div className="col-md-6">
           <div className="card-body">
             <h3 className="card-title text-center">Rescuer Details</h3>
-            <h4 className='card-title text-center'>Name : {name}</h4>
+            <h4 className='card-title text-center'>Name : {firstName}</h4>
             <h4 className='card-title text-center'>City: {city}</h4>
             <h4 className='card-title text-center'>Price: {price}</h4>
             <h4 className='card-title text-center'>Rating: {5}</h4>

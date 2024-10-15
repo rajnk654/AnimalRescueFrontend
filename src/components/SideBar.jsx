@@ -17,10 +17,8 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
           </div>
   
           <ul className='sidebar-list'>
-              <li className='sidebar-list-item'>
-                  <Link to="">
-                      <BsGrid1X2Fill className='icon'/> Dashboard
-                  </Link>
+              <li className='sidebar-list-item'> 
+                      <BsGrid1X2Fill className='icon'/> Admin Dashboard
               </li>
               <li className='sidebar-list-item'>
                   <Link to="/admin/animals">
@@ -28,15 +26,15 @@ function Sidebar({openSidebarToggle, OpenSidebar}) {
                   </Link>
               </li>
               <li className='sidebar-list-item'>
-                  <Link to="/admin/rescuer">
+                  <Link to="/admin/rescuers">
                       <BsFillGrid3X3GapFill className='icon'/> Rescuer
                   </Link>
               </li>
-              <li className='sidebar-list-item'>
+              {/* <li className='sidebar-list-item'>
                   <Link to="/">
                       <BsPeopleFill className='icon'/> Adopters
                   </Link>
-              </li>
+              </li> */}
               <li className='sidebar-list-item'>
                   <Link to="/admin/fosterCare">
                       <BsListCheck className='icon'/> Foster Care

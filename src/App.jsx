@@ -9,7 +9,7 @@ import Layout from './components/layout/Layout'
 import RescuerSignUp from "./components/RescuerSignUp";
 import RescuerPage from "./components/RescuerPage";
 import AdoptAnimal from "./components/AdoptAnimal";
-import BlogPage from "./components/BlogPage";
+//import BlogPage from "./components/BlogPage";
 import AnimalRegistration from "./Registration/AnimalRegistration";
 import AnimalModal from "./components/AnimalModal";
 import Admin from "./Registration/Admin";
@@ -31,6 +31,9 @@ import AnimalsInFosterCare from "./components/FosterCare/AnimalsInFosterCare";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminPrivateRoute from "./routes/AdminRoute";
 import Unauthorized from "./components/Pages/Unauthorized";
+import AnimalAdoption from "./components/Payment/AnimalAdoption";
+
+import FosterCareAnimalsPage from "../src/components/FosterCare/FosterCareAnimalsPage"
 
 
 
@@ -62,15 +65,18 @@ function App() {
           <Route path="/admin/signup" element={<Admin />} />
           < Route path="/rescuerSignUp" element={<RescuerSignUp />} />
           < Route path="/adoptAnimal" element={<AdoptAnimal />} />
-          <Route path="/blogPage" element={<BlogPage />} />
+          {/* <Route path="/blogPage" element={<BlogPage />} /> */}
           <Route path="/animalRegistration" element={<AnimalRegistration />} />
           <Route path="/animalModal" element={<AnimalModal />} />
+          <Route path="animalAdoption" element={<AnimalAdoption/>}/>
 
       
           <Route path="admin" element={<AdminPrivateRoute />}>
-            <Route path="rescuer" element={<SidebarRescuer />} />
+            <Route index element={<SidebarRescuer />} />
+            <Route path="rescuers" element={<SidebarRescuer />} />
             <Route path="animals" element={<SidebarAnimal />} />
             <Route path="fosterCare" element={<FosterCare />} />
+            <Route path="fosterCare/viewDetails" element={<FosterCareAnimalsPage />} />
           </Route>
 
           <Route path="/unauthorized" element={<Unauthorized/>}/>

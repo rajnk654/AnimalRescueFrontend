@@ -1,5 +1,6 @@
-import React, { useState, useContext, createContext } from "react";
+import React, { useState, useContext, createContext, useEffect } from "react";
 import parseJwt from "./ParseJwt";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -26,7 +27,7 @@ const AuthProvider = ({ children }) => {
         if (data && !isTokenExpired(data.exp)) {
           const { email, username, authorities } = data;
           return {
-            userId: email || null,
+            email : email || null,
             token: token,
             username: username || null,
             role: authorities || null,
@@ -39,6 +40,19 @@ const AuthProvider = ({ children }) => {
       return null;
     }
   });
+
+  useEffect(() =>{
+    const fetchUser = async () =>{
+      const response = await axios.get(`http://localhost:8080/api/v1/user/${auth?.email}`,{
+        headers : {
+          Authorization : auth?.token
+        }
+      });
+      const data = response.data;
+      setAuth({ ... auth, userId : data.id});
+    }
+    fetchUser();
+  },[])
 
   const updateAuth = (newAuth) => {
     if (newAuth && newAuth.token) {
@@ -61,10 +75,9 @@ const AuthProvider = ({ children }) => {
   );
 };
 
-const useAuth = () => useContext(AuthContext);
+const  useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };
-
 
 
 
